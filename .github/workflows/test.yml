@@ -9,9 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
+      - name: Ensure Scripts are Executable
+        run: chmod 755 bn.sh test_script.sh
+
       - name: Run Tests
-        run: chmod 755 test_script.sh; ./test_script.sh > test_results.txt
+        run: ./test_script.sh > test_results.txt 2>&1
 
       - name: Upload Test Results
         if: ${{ always() }}
